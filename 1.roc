@@ -6,7 +6,7 @@
 # Find the sum of all the multiples of 3 or 5 below 1000.
 
 app "solve_1"
-    packages { pf: "../roc/examples/hello-world/zig-platform" }
+    packages { pf: "../roc/examples/hello-world/platform/main.roc" }
     imports []
     provides [main] to pf
 
