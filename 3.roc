@@ -18,19 +18,35 @@ calculateLargestPrimeFactor = \n ->
         |> List.last
         |> Result.withDefault n
 
-expect (calculateLargestPrimeFactor 2) == 2
-expect (calculateLargestPrimeFactor 19) == 19
-expect (calculateLargestPrimeFactor 20) == 5
-expect (calculateLargestPrimeFactor 13195) == 29
+expect
+    factor = calculateLargestPrimeFactor 2
+    factor == 2
+expect
+    factor = calculateLargestPrimeFactor 19
+    factor == 19
+expect
+    factor = calculateLargestPrimeFactor 20
+    factor == 5
+expect
+    factor = calculateLargestPrimeFactor 13195
+    factor == 29
 
 calculatePrimeFactors = \n ->
     calculateFactors n
         |> List.keepIf isPrime
 
-expect (calculatePrimeFactors 2) == [2]
-expect (calculatePrimeFactors 19) == [19]
-expect (calculatePrimeFactors 20) == [2, 5]
-expect (calculatePrimeFactors 13195) == [5, 7, 13, 29]
+expect
+    factors = calculatePrimeFactors 2
+    factors == [2]
+expect
+    factors = calculatePrimeFactors 19
+    factors == [19]
+expect
+    factors = calculatePrimeFactors 20
+    factors == [2, 5]
+expect
+    factors = calculatePrimeFactors 13195
+    factors == [5, 7, 13, 29]
 
 calculateFactors = \n ->
     (
@@ -43,18 +59,24 @@ calculateFactors = \n ->
         |> List.prepend 1
         |> List.append n
 
-expect (calculateFactors 2) == [1, 2]
-expect (calculateFactors 19) == [1, 19]
-expect (calculateFactors 20) == [1, 2, 4, 5, 10, 20]
+expect
+    factors = calculateFactors 2
+    factors == [1, 2]
+expect
+    factors = calculateFactors 19
+    factors == [1, 19]
+expect
+    factors = calculateFactors 20
+    factors == [1, 2, 4, 5, 10, 20]
 
 isPrime = \n ->
     when n is
         1 -> False
         _ -> (calculateFactors n) == [1, n]
 
-expect (isPrime 1) == False
-expect (isPrime 2) == True
-expect (isPrime 5) == True
-expect (isPrime 19) == True
-expect (isPrime 20) == False
-expect (isPrime 13195) == False
+expect isPrime 1 |> Bool.not
+expect isPrime 2
+expect isPrime 5
+expect isPrime 19
+expect isPrime 20 |> Bool.not
+expect isPrime 13195 |> Bool.not
