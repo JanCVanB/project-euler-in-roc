@@ -27,5 +27,18 @@ computeFibonacciNumbersUpTo = \maximum ->
         if next1 > maximum then olds else more news
     more [1, 2]
 
+expect
+    fibs = computeFibonacciNumbersUpTo 5
+    fibs == [1, 2, 3, 5]
+expect
+    fibs = computeFibonacciNumbersUpTo 20
+    fibs == [1, 2, 3, 5, 8, 13]
+
 isEven = \n -> n % 2 == 0
 
+expect isEven -1 |> Bool.not
+expect isEven 0
+expect isEven 1 |> Bool.not
+expect isEven 2
+expect isEven 3 |> Bool.not
+expect isEven 4
