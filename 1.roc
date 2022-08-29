@@ -30,7 +30,7 @@ expect
 
 isMultipleOfAny = \bigger, smallers ->
     isFactor = \s -> isMultipleOfThis bigger s
-    List.find smallers isFactor |> Result.isOk
+    List.findFirst smallers isFactor |> Result.isOk
 
 expect isMultipleOfAny 6 [] |> Bool.not
 expect isMultipleOfAny 6 [2]
