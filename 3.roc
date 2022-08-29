@@ -49,12 +49,7 @@ expect
     factors == [5, 7, 13, 29]
 
 calculateFactors = \n ->
-    (
-        if n == 2 then
-            []
-        else
-            List.range 2 n
-    )
+    rangeExclusive 2 n
         |> List.keepIf (\x -> n % x == 0)
         |> List.prepend 1
         |> List.append n
@@ -80,3 +75,24 @@ expect isPrime 5
 expect isPrime 19
 expect isPrime 20 |> Bool.not
 expect isPrime 13195 |> Bool.not
+
+# This is a workaround for the unfortunate fact that `List.range x x == List.range x (x+1)`.
+# If that is no longer true, this can be replaced by `List.range`.
+rangeExclusive = \low, high ->
+    if low == high then [] else List.range low high
+
+expect
+    values = rangeExclusive 1 1
+    values == []
+expect
+    values = rangeExclusive 1 2
+    values == [1]
+expect
+    values = rangeExclusive 1 3
+    values == [1, 2]
+expect
+    values = rangeExclusive 2 3
+    values == [2]
+expect
+    values = rangeExclusive 3 3
+    values == []
